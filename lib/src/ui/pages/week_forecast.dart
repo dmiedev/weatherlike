@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weatherlike/src/constants.dart';
-import 'package:weatherlike/src/widgets/weather_line.dart';
+import 'package:weatherlike/src/ui/constants.dart';
+import 'package:weatherlike/src/ui/widgets/weather_line.dart';
 
 class WeekForecastPage extends StatelessWidget {
   static const routeName = '/week';

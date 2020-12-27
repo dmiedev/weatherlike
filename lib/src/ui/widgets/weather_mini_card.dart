@@ -6,7 +6,7 @@ class WeatherMiniCard extends StatelessWidget {
   final String upperLabel;
   final String lowerLabel;
 
-  WeatherMiniCard({
+  const WeatherMiniCard({
     this.emphasized = false,
     @required this.icon,
     @required this.upperLabel,

@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:weatherlike/src/models/weather.dart';
+import 'package:weatherlike/src/ui/widgets/weather_condition_icon.dart';
 
 class WeatherCard extends StatelessWidget {
-  final String icon;
+  final WeatherConditionIconType iconType;
   final String weatherDescription;
   final String date;
-  final int temperature;
+  final String time;
+  final String temperature;
   final WeatherCardSegment segment1;
   final WeatherCardSegment segment2;
   final WeatherCardSegment segment3;
   final WeatherCardSegment segment4;
 
-  WeatherCard({
-    @required this.icon,
+  const WeatherCard({
+    @required this.iconType,
     @required this.weatherDescription,
     @required this.date,
+    @required this.time,
     @required this.temperature,
     @required this.segment1,
     @required this.segment2,
     @required this.segment3,
     @required this.segment4,
-  })  : assert(icon != null),
+  })  : assert(iconType != null),
         assert(weatherDescription != null),
         assert(date != null),
+        assert(time != null),
         assert(temperature != null),
         assert(segment1 != null),
         assert(segment2 != null),
@@ -47,16 +52,14 @@ class WeatherCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
-                      child: Image.asset(
-                        icon,
-                        fit: BoxFit.cover,
-                      ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: WeatherConditionIcon(iconType: iconType),
                     ),
                   ),
-                  Flexible(
+                  SizedBox(width: 20.0),
+                  Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +78,14 @@ class WeatherCard extends StatelessWidget {
                             fontSize: 16.0,
                             color: Colors.white54,
                           ),
-                        )
+                        ),
+                        Text(
+                          time,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.white54,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -109,7 +119,8 @@ class WeatherCard extends StatelessWidget {
                       children: [
                         Expanded(child: segment1),
                         Container(
-                          height: 50,
+                          height: 50.0,
+                          width: 1.0,
                           child: VerticalDivider(
                             color: Colors.white54,
                             thickness: 1.0,
@@ -124,7 +135,8 @@ class WeatherCard extends StatelessWidget {
                       children: [
                         Expanded(child: segment3),
                         Container(
-                          height: 50,
+                          height: 50.0,
+                          width: 1.0,
                           child: VerticalDivider(
                             color: Colors.white54,
                             thickness: 1.0,
@@ -160,15 +172,17 @@ class WeatherCardSegment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        SizedBox(width: 25.0),
         Container(
           child: Image.asset(
             icon,
             height: 40.0,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
         ),
+        SizedBox(width: 20.0),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:weatherlike/src/pages/home.dart';
-import 'package:weatherlike/src/pages/week_forecast.dart';
+import 'package:weatherlike/src/blocs/blocs.dart';
+import 'package:weatherlike/src/repositories/repositories.dart';
+import 'package:weatherlike/src/ui/pages/home.dart';
+import 'package:weatherlike/src/ui/pages/select_city.dart';
+import 'package:weatherlike/src/ui/pages/week_forecast.dart';
 
 class WeatherLikeApp extends StatelessWidget {
+  final WeatherRepository weatherRepository;
+
+  WeatherLikeApp({Key key, @required this.weatherRepository})
+      : assert(weatherRepository != null),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,8 +31,12 @@ class WeatherLikeApp extends StatelessWidget {
       ),
       initialRoute: HomePage.routeName,
       routes: {
-        HomePage.routeName: (context) => HomePage(),
+        HomePage.routeName: (context) => BlocProvider<WeatherBloc>(
+              create: (_) => WeatherBloc(weatherRepository: weatherRepository),
+              child: HomePage(),
+            ),
         WeekForecastPage.routeName: (context) => WeekForecastPage(),
+        SelectCityPage.routeName: (context) => SelectCityPage(),
       },
     );
   }

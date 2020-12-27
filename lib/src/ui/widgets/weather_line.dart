@@ -7,7 +7,7 @@ class WeatherLine extends StatelessWidget {
   final int dayTemp;
   final int nightTemp;
 
-  WeatherLine({
+  const WeatherLine({
     @required this.icon,
     @required this.weekDay,
     @required this.date,

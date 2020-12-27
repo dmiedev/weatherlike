@@ -1,5 +1,5 @@
 name: weatherlike
-description: A new Flutter project.
+description: A Flutter weather app.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -23,7 +23,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  http: ^0.12.2
+  meta: ^1.2.4
+  provider: ^4.3.2+3
+  geolocator: ^6.1.13
+  equatable: ^1.2.5
+  flutter_bloc: ^6.1.1
+  intl: ^0.16.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
