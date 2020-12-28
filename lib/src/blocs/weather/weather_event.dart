@@ -25,3 +25,13 @@ class WeatherRefreshRequested extends WeatherEvent {
   @override
   List<Object> get props => [location];
 }
+
+class WeatherMeasurementUnitsChanged extends WeatherEvent {
+  final Location location;
+
+  const WeatherMeasurementUnitsChanged({@required this.location})
+      : assert(location != null);
+
+  @override
+  List<Object> get props => [location];
+}

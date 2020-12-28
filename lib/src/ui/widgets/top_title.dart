@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TopBar extends StatelessWidget {
+class TopTitle extends StatelessWidget {
   final String primaryText;
   final String secondaryText;
   final List<Widget> actions;
 
-  const TopBar({@required this.primaryText, this.secondaryText, this.actions})
+  const TopTitle({@required this.primaryText, this.secondaryText, this.actions})
       : assert(primaryText != null);
 
   @override

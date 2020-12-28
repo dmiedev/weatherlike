@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherlike/src/blocs/blocs.dart';
 import 'package:weatherlike/src/ui/constants.dart';
 import 'package:weatherlike/src/ui/pages/select_city.dart';
-import 'package:weatherlike/src/ui/widgets/top_bar.dart';
+import 'package:weatherlike/src/ui/pages/settings.dart';
+import 'package:weatherlike/src/ui/widgets/top_title.dart';
 import 'package:weatherlike/src/ui/widgets/weather_content.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,13 +45,18 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   padding: const EdgeInsets.all(kPagePadding),
                   children: [
-                    TopBar(
+                    TopTitle(
                       primaryText: state.location.name,
                       secondaryText: state.location.country,
-                      actions: _buildTopBarActions(context),
+                      actions: _buildTopTitleActions(context, state),
                     ),
                     SizedBox(height: 10.0),
-                    WeatherContent(weather: state.weather),
+                    WeatherContent(
+                      weather: state.weather,
+                      units: BlocProvider.of<SettingsBloc>(context)
+                          .state
+                          .measurementUnits,
+                    ),
                   ],
                 ),
               );
@@ -59,9 +65,9 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(kPagePadding),
               child: Column(
                 children: [
-                  TopBar(
+                  TopTitle(
                     primaryText: 'WeatherLike',
-                    actions: _buildTopBarActions(context),
+                    actions: _buildTopTitleActions(context, state),
                   ),
                   Expanded(child: Center(child: _buildMessage(state))),
                 ],
@@ -97,8 +103,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<Widget> _buildTopBarActions(BuildContext context) {
+  List<Widget> _buildTopTitleActions(BuildContext context, WeatherState state) {
     return <Widget>[
+      IconButton(
+        icon: Icon(Icons.settings),
+        onPressed: state is WeatherLoadInProgress
+            ? null
+            : () => Navigator.pushNamed(context, SettingsPage.routeName),
+      ),
       IconButton(
         icon: Icon(Icons.search),
         onPressed: () => _onSelectCityButtonPressed(context),

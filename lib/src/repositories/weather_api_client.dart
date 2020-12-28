@@ -26,16 +26,16 @@ class WeatherApiClient {
 
   Future<Weather> fetchWeatherByLocation(
     double latitude,
-    double longitude, [
-    String units = 'metric',
-  ]) async {
+    double longitude,
+    MeasurementUnits units,
+  ) async {
     final data = await _networkHelper.getData(
       '/data/2.5/onecall',
       {
         'lat': '$latitude',
         'lon': '$longitude',
         'exclude': 'minutely',
-        'units': '$units',
+        'units': units.toString().split('.').last,
       },
     );
     return Weather.fromJson(data);

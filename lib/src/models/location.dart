@@ -20,8 +20,8 @@ class Location extends Equatable {
 
   static Location fromJson(Map<String, dynamic> json) {
     return Location(
-      latitude: json['lat'],
-      longitude: json['lon'],
+      latitude: json['lat'] is int ? json['lat'].toDouble() : json['lat'],
+      longitude: json['lon'] is int ? json['lon'].toDouble() : json['lon'],
       country: json['country'],
       state: json['state'],
       name: json['name'],
