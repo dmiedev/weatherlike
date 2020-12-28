@@ -122,7 +122,7 @@ class WeatherContent extends StatelessWidget {
                             child: WeatherMiniCard(
                               emphasized: i == 0,
                               iconType: hourly[i].icon,
-                              lowerLabel: '${hourly[i].temperature.toInt()}°',
+                              lowerLabel: '${hourly[i].temperature.round()}°',
                               upperLabel: DateFormat.Hm().format(
                                 hourly[i].dateTime,
                               ),
@@ -165,7 +165,7 @@ class WeatherContent extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 5.0),
                             child: WeatherMiniCard(
                               iconType: hourly[i].icon,
-                              lowerLabel: '${hourly[i].temperature.toInt()}°',
+                              lowerLabel: '${hourly[i].temperature.round()}°',
                               upperLabel: DateFormat.Hm().format(
                                 hourly[i].dateTime,
                               ),
