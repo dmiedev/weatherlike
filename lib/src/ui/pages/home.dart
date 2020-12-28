@@ -119,9 +119,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _onSelectCityButtonPressed(BuildContext context) async {
-    final city = await Navigator.pushNamed(context, SelectCityPage.routeName);
-    if (city != null) {
-      BlocProvider.of<WeatherBloc>(context).add(WeatherRequested(city: city));
+    final location =
+        await Navigator.pushNamed(context, SelectCityPage.routeName);
+    if (location != null) {
+      BlocProvider.of<WeatherBloc>(context)
+          .add(WeatherRequested(location: location));
     }
   }
 }

@@ -95,7 +95,7 @@ class Weather extends Equatable {
         return WeatherConditionIconType.thunderstorm;
       case '13':
         return WeatherConditionIconType.snow;
-      case '14':
+      case '50':
         return WeatherConditionIconType.mist;
       default:
         return WeatherConditionIconType.unknown;

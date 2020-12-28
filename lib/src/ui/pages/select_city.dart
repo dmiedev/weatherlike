@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weatherlike/src/blocs/city_selection/city_selection_bloc.dart';
 import 'package:weatherlike/src/ui/constants.dart';
 
 class SelectCityPage extends StatefulWidget {
@@ -68,10 +70,21 @@ class _SelectCityPageState extends State<SelectCityPage> {
                                   : null,
                             ),
                           ),
-                          IconButton(
-                            icon: Icon(Icons.search),
-                            onPressed: () =>
-                                _onSelectCityButtonPressed(context),
+                          BlocConsumer<CitySelectionBloc, CitySelectionState>(
+                            listener: _citySelectionBlocListener,
+                            builder: (context, state) {
+                              if (state is CitySelectionLoading) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              return IconButton(
+                                icon: Icon(Icons.search),
+                                onPressed: () =>
+                                    _onSelectCityButtonPressed(context),
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -86,9 +99,32 @@ class _SelectCityPageState extends State<SelectCityPage> {
     );
   }
 
+  void _citySelectionBlocListener(
+    BuildContext context,
+    CitySelectionState state,
+  ) {
+    if (state is CitySelectionFailure) {
+      String message = 'Error!';
+      if (state.failureType == CitySelectionFailureType.notFound) {
+        message = 'City "${state.cityName}" wasn\'t found!';
+      } else if (state.failureType == CitySelectionFailureType.noInternet) {
+        message = 'Can\'t reach server! Check your Internet connection!';
+      }
+      Scaffold.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+    } else if (state is CitySelectionSuccess) {
+      Navigator.pop(context, state.location);
+    }
+  }
+
   void _onSelectCityButtonPressed(BuildContext context) {
     if (_formKey.currentState.validate()) {
-      Navigator.pop(context, _cityController.text);
+      BlocProvider.of<CitySelectionBloc>(context).add(
+        CitySelectionMade(cityName: _cityController.text),
+      );
     }
   }
 }

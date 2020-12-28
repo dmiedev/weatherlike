@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:weatherlike/src/models/weather.dart';
 import 'package:weatherlike/src/ui/constants.dart';
 

@@ -38,8 +38,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       yield* _mapWeatherRequestedToState(event);
     } else if (event is WeatherRefreshRequested) {
       yield* _mapWeatherRefreshRequestedToState(event);
-    } else if (event is WeatherMeasurementUnitsChanged) {
-      yield* _mapWeatherMeasurementUnitsChangedToState(event);
     }
   }
 
@@ -48,13 +46,13 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) async* {
     yield WeatherLoadInProgress();
     try {
-      final data = await weatherRepository.getWeatherAndLocation(
-        event.city,
+      final weather = await weatherRepository.getWeatherByLocation(
+        event.location,
         _settingsBloc.state.measurementUnits,
       );
       yield WeatherLoadSuccess(
-        weather: data['weather'],
-        location: data['location'],
+        weather: weather,
+        location: event.location,
       );
     } catch (_) {
       yield WeatherLoadFailure();
@@ -64,41 +62,26 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   Stream<WeatherState> _mapWeatherRefreshRequestedToState(
     WeatherRefreshRequested event,
   ) async* {
-    try {
-      final data = await weatherRepository.getWeatherByLocation(
-        event.location,
-        _settingsBloc.state.measurementUnits,
-      );
-      yield WeatherLoadSuccess(
-        weather: data,
-        location: event.location,
-      );
-    } catch (_) {}
-  }
-
-  Stream<WeatherState> _mapWeatherMeasurementUnitsChangedToState(
-    WeatherMeasurementUnitsChanged event,
-  ) async* {
-    yield WeatherLoadInProgress();
-    try {
-      final data = await weatherRepository.getWeatherByLocation(
-        event.location,
-        _settingsBloc.state.measurementUnits,
-      );
-      yield WeatherLoadSuccess(
-        weather: data,
-        location: event.location,
-      );
-    } catch (_) {
-      yield WeatherLoadFailure();
+    if (state is WeatherLoadSuccess) {
+      try {
+        final data = await weatherRepository.getWeatherByLocation(
+          event.location,
+          _settingsBloc.state.measurementUnits,
+        );
+        yield WeatherLoadSuccess(
+          weather: data,
+          location: event.location,
+        );
+      } catch (_) {
+        yield state;
+      }
     }
   }
 
   void _settingsListener(SettingsState _) {
     if (state is WeatherLoadSuccess) {
       add(
-        WeatherMeasurementUnitsChanged(
-            location: (state as WeatherLoadSuccess).location),
+        WeatherRequested(location: (state as WeatherLoadSuccess).location),
       );
     }
   }

@@ -8,28 +8,18 @@ abstract class WeatherEvent extends Equatable {
 }
 
 class WeatherRequested extends WeatherEvent {
-  final String city;
+  final Location location;
 
-  const WeatherRequested({@required this.city}) : assert(city != null);
+  const WeatherRequested({@required this.location}) : assert(location != null);
 
   @override
-  List<Object> get props => [city];
+  List<Object> get props => [location];
 }
 
 class WeatherRefreshRequested extends WeatherEvent {
   final Location location;
 
   const WeatherRefreshRequested({@required this.location})
-      : assert(location != null);
-
-  @override
-  List<Object> get props => [location];
-}
-
-class WeatherMeasurementUnitsChanged extends WeatherEvent {
-  final Location location;
-
-  const WeatherMeasurementUnitsChanged({@required this.location})
       : assert(location != null);
 
   @override

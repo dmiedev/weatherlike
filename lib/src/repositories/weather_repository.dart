@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:meta/meta.dart';
-import 'package:weatherlike/src/models/models.dart';
 
+import 'package:weatherlike/src/models/models.dart';
 import 'package:weatherlike/src/repositories/weather_api_client.dart';
 
 class WeatherRepository {
@@ -11,15 +11,9 @@ class WeatherRepository {
   WeatherRepository({@required this.weatherApiClient})
       : assert(weatherApiClient != null);
 
-  Future<Map<String, dynamic>> getWeatherAndLocation(
-    String city,
-    MeasurementUnits units,
-  ) async {
-    final location = await weatherApiClient.fetchLocationByCityName(city);
-    return {
-      'weather': await getWeatherByLocation(location, units),
-      'location': location,
-    };
+  Future<Location> getLocationByCityName(String cityName) async {
+    final location = await weatherApiClient.fetchLocationByCityName(cityName);
+    return location;
   }
 
   Future<Weather> getWeatherByLocation(
@@ -32,4 +26,6 @@ class WeatherRepository {
       units,
     );
   }
+
+  void close() => weatherApiClient.close();
 }

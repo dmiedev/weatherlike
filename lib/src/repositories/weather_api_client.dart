@@ -40,4 +40,6 @@ class WeatherApiClient {
     );
     return Weather.fromJson(data);
   }
+
+  void close() => _networkHelper.close();
 }

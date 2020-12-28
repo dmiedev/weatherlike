@@ -13,6 +13,8 @@ class NetworkHelper {
     this.defaultParameters,
   ]);
 
+  void close() => httpClient.close();
+
   Future<dynamic> getData(
     String path, [
     Map<String, String> parameters,
@@ -21,9 +23,29 @@ class NetworkHelper {
       Uri.https(authority, path, {...?parameters, ...?defaultParameters}),
     );
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      final data = json.decode(response.body);
+      if (data is List && data.isEmpty) {
+        throw EmptyResponseException('Empty response!');
+      }
+      return data;
     } else {
-      throw Exception('Failed to load data with a response: ${response.body}');
+      throw BadResponseException(
+        'Failed to load data with a response: ${response.body}',
+      );
     }
   }
+}
+
+class NetworkException implements Exception {
+  final String message;
+
+  const NetworkException(this.message);
+}
+
+class EmptyResponseException extends NetworkException {
+  EmptyResponseException(String message) : super(message);
+}
+
+class BadResponseException extends NetworkException {
+  BadResponseException(String message) : super(message);
 }
