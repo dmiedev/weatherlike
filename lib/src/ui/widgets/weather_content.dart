@@ -9,12 +9,15 @@ import 'package:weatherlike/src/ui/widgets/widgets.dart';
 
 class WeatherContent extends StatelessWidget {
   final Weather weather;
+  final Location location;
   final MeasurementUnits units;
 
   const WeatherContent({
     @required this.weather,
+    @required this.location,
     @required this.units,
   })  : assert(weather != null),
+        assert(location != null),
         assert(units != null);
 
   String get _thermometerIconName {
@@ -83,8 +86,15 @@ class WeatherContent extends StatelessWidget {
                 color: Colors.black54,
               ),
             ),
-            onPressed: () =>
-                Navigator.pushNamed(context, WeekForecastPage.routeName),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WeekForecastPage(
+                  dailyWeather: weather.daily,
+                  location: location,
+                ),
+              ),
+            ),
           ),
         ),
         Builder(

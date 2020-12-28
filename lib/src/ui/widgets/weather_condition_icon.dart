@@ -11,13 +11,10 @@ class WeatherConditionIcon extends StatelessWidget {
 
   const WeatherConditionIcon({
     @required this.iconType,
-    @required this.dateTime,
-    @required this.sunrise,
-    @required this.sunset,
-  })  : assert(iconType != null),
-        assert(dateTime != null),
-        assert(sunrise != null),
-        assert(sunset != null);
+    this.dateTime,
+    this.sunrise,
+    this.sunset,
+  }) : assert(iconType != null);
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +25,13 @@ class WeatherConditionIcon extends StatelessWidget {
   }
 
   String get _iconVariant {
-    if (dateTime.isAfter(sunrise) && dateTime.isBefore(sunset)) {
-      return '-day';
+    if (dateTime != null && sunrise != null && sunset != null) {
+      if (dateTime.isAfter(sunrise) && dateTime.isBefore(sunset)) {
+        return '-day';
+      }
+      return '-night';
     }
-    return '-night';
+    return '-day';
   }
 
   String _mapWeatherIconTypeToIconName(WeatherConditionIconType iconType) {

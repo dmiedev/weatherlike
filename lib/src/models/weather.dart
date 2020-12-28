@@ -27,6 +27,7 @@ class Weather extends Equatable {
   final String description;
   final WeatherConditionIconType icon;
   final List<HourlyWeather> hourly;
+  final List<DailyWeather> daily;
 
   const Weather({
     this.currentDateTime,
@@ -40,6 +41,7 @@ class Weather extends Equatable {
     this.description,
     this.icon,
     this.hourly,
+    this.daily,
   });
 
   @override
@@ -55,6 +57,7 @@ class Weather extends Equatable {
         description,
         icon,
         hourly,
+        daily,
       ];
 
   static Weather fromJson(Map<String, dynamic> json) {
@@ -90,6 +93,10 @@ class Weather extends Equatable {
       hourly: List<HourlyWeather>.generate(
         json['hourly'].length,
         (index) => HourlyWeather.fromJson(json['hourly'][index]),
+      ),
+      daily: List<DailyWeather>.generate(
+        json['daily'].length,
+        (index) => DailyWeather.fromJson(json['daily'][index]),
       ),
     );
   }
@@ -137,6 +144,49 @@ class HourlyWeather extends Equatable {
     return HourlyWeather(
       dateTime: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
       temperature: json['temp'] is int ? json['temp'].toDouble() : json['temp'],
+      icon: Weather.mapWeatherIconCodeToWeatherIcon(json['weather'][0]['icon']),
+    );
+  }
+}
+
+class DailyWeather extends Equatable {
+  final DateTime dateTime;
+  final DateTime sunrise;
+  final DateTime sunset;
+  final double maxTemperature;
+  final double minTemperature;
+  final WeatherConditionIconType icon;
+
+  const DailyWeather({
+    this.dateTime,
+    this.sunrise,
+    this.sunset,
+    this.maxTemperature,
+    this.minTemperature,
+    this.icon,
+  });
+
+  @override
+  List<Object> get props => [
+        dateTime,
+        sunrise,
+        sunset,
+        maxTemperature,
+        minTemperature,
+        icon,
+      ];
+
+  static DailyWeather fromJson(Map<String, dynamic> json) {
+    return DailyWeather(
+      dateTime: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
+      sunrise: DateTime.fromMillisecondsSinceEpoch(json['sunrise'] * 1000),
+      sunset: DateTime.fromMillisecondsSinceEpoch(json['sunset'] * 1000),
+      maxTemperature: json['temp']['max'] is int
+          ? json['temp']['max'].toDouble()
+          : json['temp']['max'],
+      minTemperature: json['temp']['min'] is int
+          ? json['temp']['min'].toDouble()
+          : json['temp']['min'],
       icon: Weather.mapWeatherIconCodeToWeatherIcon(json['weather'][0]['icon']),
     );
   }

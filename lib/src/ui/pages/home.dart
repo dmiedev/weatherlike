@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(height: 10.0),
                     WeatherContent(
                       weather: state.weather,
+                      location: state.location,
                       units: BlocProvider.of<SettingsBloc>(context)
                           .state
                           .measurementUnits,

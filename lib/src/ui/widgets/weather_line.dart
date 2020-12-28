@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:weatherlike/src/models/models.dart';
+import 'package:weatherlike/src/ui/widgets/weather_condition_icon.dart';
 
 class WeatherLine extends StatelessWidget {
-  final String icon;
+  final WeatherConditionIconType iconType;
   final String weekDay;
   final String date;
-  final int dayTemp;
-  final int nightTemp;
+  final int maxTemp;
+  final int minTemp;
 
   const WeatherLine({
-    @required this.icon,
+    @required this.iconType,
     @required this.weekDay,
     @required this.date,
-    @required this.dayTemp,
-    @required this.nightTemp,
-  })  : assert(icon != null),
+    @required this.maxTemp,
+    @required this.minTemp,
+  })  : assert(iconType != null),
         assert(weekDay != null),
         assert(date != null),
-        assert(dayTemp != null),
-        assert(nightTemp != null);
+        assert(maxTemp != null),
+        assert(minTemp != null);
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +30,7 @@ class WeatherLine extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
-                icon,
-                fit: BoxFit.cover,
-              ),
+              WeatherConditionIcon(iconType: iconType),
               SizedBox(width: 40.0),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -59,7 +58,7 @@ class WeatherLine extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             children: [
               Text(
-                '$dayTemp',
+                '$maxTemp°',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.w500,
@@ -67,7 +66,7 @@ class WeatherLine extends StatelessWidget {
                 ),
               ),
               Text(
-                ' / $nightTemp°',
+                ' / $minTemp°',
                 style: TextStyle(
                   fontSize: 16.0,
                   color: Colors.white54,

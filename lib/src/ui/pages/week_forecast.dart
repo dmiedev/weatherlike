@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
+import 'package:weatherlike/src/models/models.dart';
 import 'package:weatherlike/src/ui/constants.dart';
 import 'package:weatherlike/src/ui/widgets/widgets.dart';
 
 class WeekForecastPage extends StatelessWidget {
-  static const routeName = '/week';
+  final List<DailyWeather> dailyWeather;
+  final Location location;
+
+  const WeekForecastPage({@required this.dailyWeather, @required this.location})
+      : assert(dailyWeather != null),
+        assert(location != null);
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +32,14 @@ class WeekForecastPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.baseline,
           children: [
             Text(
-              'Saint Petersburg,',
+              '${location.name},',
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
               ),
             ),
             Text(
-              ' Russia',
+              ' ${location.country}',
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.white54,
@@ -58,15 +65,15 @@ class WeekForecastPage extends StatelessWidget {
                 fontSize: 24.0,
               ),
             ),
-            for (int i = 0; i < 8; i++)
+            for (final day in dailyWeather)
               Padding(
                 padding: EdgeInsets.only(top: 40.0),
                 child: WeatherLine(
-                  date: '3 Oct',
-                  weekDay: 'Monday',
-                  icon: iconPath('cloudy'),
-                  dayTemp: 25,
-                  nightTemp: 20,
+                  date: DateFormat.MMMd().format(day.dateTime),
+                  weekDay: DateFormat.EEEE().format(day.dateTime),
+                  iconType: day.icon,
+                  maxTemp: day.maxTemperature.round(),
+                  minTemp: day.minTemperature.round(),
                 ),
               )
           ],
