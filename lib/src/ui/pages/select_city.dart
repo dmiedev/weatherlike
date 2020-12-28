@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weatherlike/src/blocs/city_selection/city_selection_bloc.dart';
+
+import 'package:weatherlike/src/blocs/blocs.dart';
 import 'package:weatherlike/src/ui/constants.dart';
 
 class SelectCityPage extends StatefulWidget {

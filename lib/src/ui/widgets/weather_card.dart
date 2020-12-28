@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weatherlike/src/models/weather.dart';
-import 'package:weatherlike/src/ui/widgets/weather_condition_icon.dart';
+
+import 'package:weatherlike/src/models/models.dart';
+import 'package:weatherlike/src/ui/widgets/widgets.dart';
 
 class WeatherCard extends StatelessWidget {
   final WeatherConditionIconType iconType;

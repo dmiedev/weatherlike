@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:weatherlike/src/models/measurement_units.dart';
+
+import 'package:weatherlike/src/models/models.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';

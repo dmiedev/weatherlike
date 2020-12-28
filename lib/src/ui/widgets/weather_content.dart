@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:weatherlike/src/models/models.dart';
 import 'package:weatherlike/src/ui/constants.dart';
-import 'package:weatherlike/src/ui/widgets/weather_card.dart';
+import 'package:weatherlike/src/ui/widgets/widgets.dart';
 
 class WeatherContent extends StatelessWidget {
   final Weather weather;

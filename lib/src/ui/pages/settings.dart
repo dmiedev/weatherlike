@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:weatherlike/src/blocs/blocs.dart';
-import 'package:weatherlike/src/models/measurement_units.dart';
+import 'package:weatherlike/src/models/models.dart';
 import 'package:weatherlike/src/ui/constants.dart';
 
 class SettingsPage extends StatelessWidget {

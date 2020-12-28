@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:weatherlike/src/utilities/string_extension.dart';
+import 'package:weatherlike/src/utilities/utilities.dart';
 
 enum WeatherConditionIconType {
   unknown,

@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/utilities/network_helper.dart';
+import 'package:weatherlike/src/utilities/utilities.dart';
 
 class WeatherApiClient {
   static const _authority = 'api.openweathermap.org';

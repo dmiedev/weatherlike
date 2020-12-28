@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 
 import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/repositories/weather_api_client.dart';
+import 'package:weatherlike/src/repositories/repositories.dart';
 
 class WeatherRepository {
   final WeatherApiClient weatherApiClient;

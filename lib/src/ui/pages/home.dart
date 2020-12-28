@@ -6,10 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:weatherlike/src/blocs/blocs.dart';
 import 'package:weatherlike/src/ui/constants.dart';
-import 'package:weatherlike/src/ui/pages/select_city.dart';
-import 'package:weatherlike/src/ui/pages/settings.dart';
-import 'package:weatherlike/src/ui/widgets/top_title.dart';
-import 'package:weatherlike/src/ui/widgets/weather_content.dart';
+import 'package:weatherlike/src/ui/pages/pages.dart';
+import 'package:weatherlike/src/ui/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/';
