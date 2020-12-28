@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:weatherlike/src/models/models.dart';
+import 'package:weatherlike/src/ui/widgets/weather_condition_icon.dart';
 
 class WeatherMiniCard extends StatelessWidget {
   final bool emphasized;
-  final String icon;
+  final WeatherConditionIconType iconType;
   final String upperLabel;
   final String lowerLabel;
 
   const WeatherMiniCard({
     this.emphasized = false,
-    @required this.icon,
+    @required this.iconType,
     @required this.upperLabel,
     @required this.lowerLabel,
-  })  : assert(icon != null),
+  })  : assert(iconType != null),
         assert(upperLabel != null),
         assert(lowerLabel != null);
 
@@ -45,10 +47,7 @@ class WeatherMiniCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 12.0),
-                child: Image.asset(
-                  icon,
-                  fit: BoxFit.cover,
-                ),
+                child: WeatherConditionIcon(iconType: iconType),
               ),
               Text(
                 lowerLabel,

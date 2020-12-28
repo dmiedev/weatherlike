@@ -31,7 +31,7 @@ class WeatherLikeApp extends StatelessWidget {
       initialRoute: HomePage.routeName,
       routes: {
         HomePage.routeName: (context) => HomePage(),
-        // WeekForecastPage.routeName: (context) => WeekForecastPage(),
+        WeekForecastPage.routeName: (context) => WeekForecastPage(),
         SelectCityPage.routeName: (context) => BlocProvider(
               create: (_) =>
                   CitySelectionBloc(weatherRepository: weatherRepository),

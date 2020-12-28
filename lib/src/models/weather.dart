@@ -24,6 +24,7 @@ class Weather extends Equatable {
   final double windSpeed;
   final String description;
   final WeatherConditionIconType icon;
+  final List<HourlyWeather> hourly;
 
   const Weather({
     this.currentDateTime,
@@ -34,6 +35,7 @@ class Weather extends Equatable {
     this.windSpeed,
     this.description,
     this.icon,
+    this.hourly,
   });
 
   @override
@@ -46,6 +48,7 @@ class Weather extends Equatable {
         windSpeed,
         description,
         icon,
+        hourly,
       ];
 
   static Weather fromJson(Map<String, dynamic> json) {
@@ -69,14 +72,19 @@ class Weather extends Equatable {
           : currentWeather['wind_speed'],
       description:
           (currentWeather['weather'][0]['description'] as String).capitalize(),
-      icon: _mapWeatherIconCodeToWeatherIcon(
+      icon: mapWeatherIconCodeToWeatherIcon(
         currentWeather['weather'][0]['icon'],
+      ),
+      hourly: List<HourlyWeather>.generate(
+        json['hourly'].length,
+        (index) => HourlyWeather.fromJson(json['hourly'][index]),
       ),
     );
   }
 
-  static WeatherConditionIconType _mapWeatherIconCodeToWeatherIcon(
-      String iconCode) {
+  static WeatherConditionIconType mapWeatherIconCodeToWeatherIcon(
+    String iconCode,
+  ) {
     final code = iconCode.substring(0, 2);
     switch (code) {
       case '01':
@@ -100,5 +108,24 @@ class Weather extends Equatable {
       default:
         return WeatherConditionIconType.unknown;
     }
+  }
+}
+
+class HourlyWeather extends Equatable {
+  final DateTime dateTime;
+  final double temperature;
+  final WeatherConditionIconType icon;
+
+  const HourlyWeather({this.dateTime, this.temperature, this.icon});
+
+  @override
+  List<Object> get props => [dateTime, temperature, icon];
+
+  static HourlyWeather fromJson(Map<String, dynamic> json) {
+    return HourlyWeather(
+      dateTime: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
+      temperature: json['temp'] is int ? json['temp'].toDouble() : json['temp'],
+      icon: Weather.mapWeatherIconCodeToWeatherIcon(json['weather'][0]['icon']),
+    );
   }
 }
