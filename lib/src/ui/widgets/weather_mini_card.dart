@@ -7,15 +7,24 @@ class WeatherMiniCard extends StatelessWidget {
   final WeatherConditionIconType iconType;
   final String upperLabel;
   final String lowerLabel;
+  final DateTime dateTime;
+  final DateTime sunrise;
+  final DateTime sunset;
 
   const WeatherMiniCard({
     this.emphasized = false,
     @required this.iconType,
     @required this.upperLabel,
     @required this.lowerLabel,
+    @required this.dateTime,
+    @required this.sunrise,
+    @required this.sunset,
   })  : assert(iconType != null),
         assert(upperLabel != null),
-        assert(lowerLabel != null);
+        assert(lowerLabel != null),
+        assert(dateTime != null),
+        assert(sunrise != null),
+        assert(sunset != null);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +56,12 @@ class WeatherMiniCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 12.0),
-                child: WeatherConditionIcon(iconType: iconType),
+                child: WeatherConditionIcon(
+                  iconType: iconType,
+                  dateTime: dateTime,
+                  sunrise: sunrise,
+                  sunset: sunset,
+                ),
               ),
               Text(
                 lowerLabel,

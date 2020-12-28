@@ -37,6 +37,7 @@ class WeatherContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         WeatherCard(
           iconType: weather.icon,
@@ -44,6 +45,9 @@ class WeatherContent extends StatelessWidget {
           date: DateFormat.MMMEd().format(weather.currentDateTime),
           time: DateFormat.Hm().format(weather.currentDateTime),
           temperature: weather.temperature.toStringAsFixed(1),
+          dateTime: weather.currentDateTime,
+          sunrise: weather.sunrise,
+          sunset: weather.sunset,
           segment1: WeatherCardSegment(
             name: 'WIND',
             value: '${weather.windSpeed} $_windMeasurementUnits',
@@ -112,6 +116,9 @@ class WeatherContent extends StatelessWidget {
                               upperLabel: DateFormat.Hm().format(
                                 hourly[i].dateTime,
                               ),
+                              dateTime: hourly[i].dateTime,
+                              sunrise: weather.sunrise,
+                              sunset: weather.sunset,
                             ),
                           ),
                       ],
@@ -152,6 +159,9 @@ class WeatherContent extends StatelessWidget {
                               upperLabel: DateFormat.Hm().format(
                                 hourly[i].dateTime,
                               ),
+                              dateTime: hourly[i].dateTime,
+                              sunrise: weather.sunrise,
+                              sunset: weather.sunset, // TODO: for tomorrow day
                             ),
                           ),
                       ],

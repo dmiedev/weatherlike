@@ -17,6 +17,8 @@ enum WeatherConditionIconType {
 
 class Weather extends Equatable {
   final DateTime currentDateTime;
+  final DateTime sunrise;
+  final DateTime sunset;
   final double temperature;
   final double feelsLike;
   final double humidity;
@@ -28,6 +30,8 @@ class Weather extends Equatable {
 
   const Weather({
     this.currentDateTime,
+    this.sunrise,
+    this.sunset,
     this.temperature,
     this.feelsLike,
     this.humidity,
@@ -41,6 +45,8 @@ class Weather extends Equatable {
   @override
   List<Object> get props => [
         currentDateTime,
+        sunrise,
+        sunset,
         temperature,
         feelsLike,
         humidity,
@@ -55,6 +61,12 @@ class Weather extends Equatable {
     final currentWeather = json['current'];
     return Weather(
       currentDateTime: DateTime.now(),
+      sunrise: DateTime.fromMillisecondsSinceEpoch(
+        currentWeather['sunrise'] * 1000,
+      ),
+      sunset: DateTime.fromMillisecondsSinceEpoch(
+        currentWeather['sunset'] * 1000,
+      ),
       temperature: currentWeather['temp'] is int
           ? currentWeather['temp'].toDouble()
           : currentWeather['temp'],

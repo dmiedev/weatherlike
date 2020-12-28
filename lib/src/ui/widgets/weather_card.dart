@@ -6,6 +6,9 @@ import 'package:weatherlike/src/ui/widgets/widgets.dart';
 class WeatherCard extends StatelessWidget {
   final WeatherConditionIconType iconType;
   final String weatherDescription;
+  final DateTime dateTime;
+  final DateTime sunrise;
+  final DateTime sunset;
   final String date;
   final String time;
   final String temperature;
@@ -17,6 +20,9 @@ class WeatherCard extends StatelessWidget {
   const WeatherCard({
     @required this.iconType,
     @required this.weatherDescription,
+    @required this.dateTime,
+    @required this.sunrise,
+    @required this.sunset,
     @required this.date,
     @required this.time,
     @required this.temperature,
@@ -26,6 +32,9 @@ class WeatherCard extends StatelessWidget {
     @required this.segment4,
   })  : assert(iconType != null),
         assert(weatherDescription != null),
+        assert(dateTime != null),
+        assert(sunrise != null),
+        assert(sunset != null),
         assert(date != null),
         assert(time != null),
         assert(temperature != null),
@@ -56,7 +65,12 @@ class WeatherCard extends StatelessWidget {
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: WeatherConditionIcon(iconType: iconType),
+                      child: WeatherConditionIcon(
+                        iconType: iconType,
+                        sunrise: sunrise,
+                        sunset: sunset,
+                        dateTime: dateTime,
+                      ),
                     ),
                   ),
                   SizedBox(width: 20.0),
