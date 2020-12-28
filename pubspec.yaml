@@ -25,7 +25,6 @@ dependencies:
     sdk: flutter
   http: ^0.12.2
   meta: ^1.2.4
-  provider: ^4.3.2+3
   geolocator: ^6.1.13
   equatable: ^1.2.5
   flutter_bloc: ^6.1.1
