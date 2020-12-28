@@ -12,10 +12,11 @@ part 'city_selection_event.dart';
 part 'city_selection_state.dart';
 
 class CitySelectionBloc extends Bloc<CitySelectionEvent, CitySelectionState> {
-  final WeatherRepository weatherRepository;
+  final WeatherRepository _weatherRepository;
 
-  CitySelectionBloc({@required this.weatherRepository})
+  CitySelectionBloc({@required WeatherRepository weatherRepository})
       : assert(weatherRepository != null),
+        _weatherRepository = weatherRepository,
         super(CitySelectionInitial());
 
   @override
@@ -32,8 +33,9 @@ class CitySelectionBloc extends Bloc<CitySelectionEvent, CitySelectionState> {
   ) async* {
     yield CitySelectionLoading();
     try {
-      final location =
-          await weatherRepository.getLocationByCityName(event.cityName);
+      final location = await _weatherRepository.getLocationByCityName(
+        event.cityName,
+      );
       yield CitySelectionSuccess(location: location);
     } on EmptyResponseException {
       yield CitySelectionFailure(

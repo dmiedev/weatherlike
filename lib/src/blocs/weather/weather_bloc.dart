@@ -12,14 +12,15 @@ part 'weather_event.dart';
 part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
-  final WeatherRepository weatherRepository;
+  final WeatherRepository _weatherRepository;
   final SettingsBloc _settingsBloc;
   StreamSubscription<SettingsState> _settingsSubscription;
 
   WeatherBloc({
-    @required this.weatherRepository,
+    @required WeatherRepository weatherRepository,
     @required SettingsBloc settingsBloc,
   })  : assert(weatherRepository != null),
+        _weatherRepository = weatherRepository,
         assert(settingsBloc != null),
         _settingsBloc = settingsBloc,
         super(WeatherInitial()) {
@@ -46,7 +47,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) async* {
     yield WeatherLoadInProgress();
     try {
-      final weather = await weatherRepository.getWeatherByLocation(
+      final weather = await _weatherRepository.getWeatherByLocation(
         event.location,
         _settingsBloc.state.measurementUnits,
       );
@@ -64,7 +65,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) async* {
     if (state is WeatherLoadSuccess) {
       try {
-        final data = await weatherRepository.getWeatherByLocation(
+        final data = await _weatherRepository.getWeatherByLocation(
           event.location,
           _settingsBloc.state.measurementUnits,
         );
