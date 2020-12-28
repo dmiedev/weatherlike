@@ -170,8 +170,8 @@ class WeatherContent extends StatelessWidget {
                                 hourly[i].dateTime,
                               ),
                               dateTime: hourly[i].dateTime,
-                              sunrise: weather.sunrise,
-                              sunset: weather.sunset, // TODO: for tomorrow day
+                              sunrise: weather.daily[1].sunrise,
+                              sunset: weather.daily[1].sunset,
                             ),
                           ),
                       ],
