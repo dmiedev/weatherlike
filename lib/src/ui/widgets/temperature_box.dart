@@ -29,7 +29,7 @@ class TemperatureBox extends StatelessWidget {
         SizedBox(width: 10.0),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
               maxTemperature,
