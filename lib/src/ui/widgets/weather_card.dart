@@ -12,6 +12,8 @@ class WeatherCard extends StatelessWidget {
   final String date;
   final String time;
   final String temperature;
+  final String maxTemperature;
+  final String minTemperature;
   final WeatherCardSegment segment1;
   final WeatherCardSegment segment2;
   final WeatherCardSegment segment3;
@@ -26,6 +28,8 @@ class WeatherCard extends StatelessWidget {
     @required this.date,
     @required this.time,
     @required this.temperature,
+    @required this.maxTemperature,
+    @required this.minTemperature,
     @required this.segment1,
     @required this.segment2,
     @required this.segment3,
@@ -38,6 +42,8 @@ class WeatherCard extends StatelessWidget {
         assert(date != null),
         assert(time != null),
         assert(temperature != null),
+        assert(maxTemperature != null),
+        assert(minTemperature != null),
         assert(segment1 != null),
         assert(segment2 != null),
         assert(segment3 != null),
@@ -110,13 +116,10 @@ class WeatherCard extends StatelessWidget {
             Expanded(
               flex: 5,
               child: Center(
-                child: Text(
-                  '$temperature°',
-                  style: TextStyle(
-                    fontSize: 80.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: TemperatureBox(
+                  currentTemperature: temperature,
+                  maxTemperature: maxTemperature,
+                  minTemperature: minTemperature,
                 ),
               ),
             ),
