@@ -35,13 +35,17 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   ) async* {
     yield LocationLoadInProgress();
     if (await _locationRepository.initialize()) {
-      final coordinates =
-          await _locationRepository.getCurrentLocationCoordinates();
-      final location = await _weatherRepository.getLocationByCoordinates(
-        coordinates['latitude'],
-        coordinates['longitude'],
-      );
-      yield LocationLoadSuccess(location: location);
+      try {
+        final coordinates =
+            await _locationRepository.getCurrentLocationCoordinates();
+        final location = await _weatherRepository.getLocationByCoordinates(
+          coordinates['latitude'],
+          coordinates['longitude'],
+        );
+        yield LocationLoadSuccess(location: location);
+      } catch (_) {
+        yield LocationLoadFailure();
+      }
     } else {
       yield LocationLoadFailure();
     }
