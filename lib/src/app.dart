@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:weatherlike/src/blocs/blocs.dart';
 import 'package:weatherlike/src/repositories/repositories.dart';
+import 'package:weatherlike/src/ui/pages/location_loading.dart';
 import 'package:weatherlike/src/ui/pages/pages.dart';
 
 class WeatherLikeApp extends StatelessWidget {
@@ -28,14 +29,26 @@ class WeatherLikeApp extends StatelessWidget {
           },
         ),
       ),
-      initialRoute: HomePage.routeName,
+      initialRoute: LocationLoadingPage.routeName,
       routes: {
+        LocationLoadingPage.routeName: (context) {
+          return BlocProvider(
+            create: (_) => LocationBloc(
+              weatherRepository: weatherRepository,
+              locationRepository: LocationRepository(),
+            )..add(LocationRequested()),
+            child: LocationLoadingPage(),
+          );
+        },
         HomePage.routeName: (context) => HomePage(),
-        SelectCityPage.routeName: (context) => BlocProvider(
-              create: (_) =>
-                  CitySelectionBloc(weatherRepository: weatherRepository),
-              child: SelectCityPage(),
+        SelectCityPage.routeName: (context) {
+          return BlocProvider(
+            create: (_) => CitySelectionBloc(
+              weatherRepository: weatherRepository,
             ),
+            child: SelectCityPage(),
+          );
+        },
         SettingsPage.routeName: (context) => SettingsPage(),
       },
     );

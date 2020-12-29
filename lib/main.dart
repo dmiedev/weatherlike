@@ -12,9 +12,7 @@ void main() {
   Bloc.observer = SimpleBlocObserver();
 
   final weatherRepository = WeatherRepository(
-    weatherApiClient: WeatherApiClient(
-      httpClient: http.Client(),
-    ),
+    weatherApiClient: WeatherApiClient(httpClient: http.Client()),
   );
 
   runApp(

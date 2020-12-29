@@ -24,6 +24,17 @@ class WeatherApiClient {
     return Location.fromJson(data.first);
   }
 
+  Future<Location> fetchLocationByCoordinates(
+    double latitude,
+    double longitude,
+  ) async {
+    final List data = await _networkHelper.getData(
+      '/geo/1.0/reverse',
+      {'lat': '$latitude', 'lon': '$longitude', 'limit': '1'},
+    );
+    return Location.fromJson(data.first);
+  }
+
   Future<Weather> fetchWeatherByLocation(
     double latitude,
     double longitude,
