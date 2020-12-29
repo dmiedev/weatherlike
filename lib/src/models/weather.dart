@@ -63,7 +63,9 @@ class Weather extends Equatable {
   static Weather fromJson(Map<String, dynamic> json) {
     final currentWeather = json['current'];
     return Weather(
-      currentDateTime: DateTime.now(),
+      currentDateTime: DateTime.fromMillisecondsSinceEpoch(
+        currentWeather['dt'] * 1000,
+      ),
       sunrise: DateTime.fromMillisecondsSinceEpoch(
         currentWeather['sunrise'] * 1000,
       ),

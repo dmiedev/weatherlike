@@ -54,6 +54,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       yield WeatherLoadSuccess(
         weather: weather,
         location: event.location,
+        loadDateTime: DateTime.now(),
       );
     } catch (_) {
       yield WeatherLoadFailure();
@@ -72,9 +73,11 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         yield WeatherLoadSuccess(
           weather: data,
           location: event.location,
+          loadDateTime: DateTime.now(),
         );
       } catch (_) {
-        yield state;
+        yield (state as WeatherLoadSuccess)
+            .copyWith(loadDateTime: DateTime.now());
       }
     }
   }
