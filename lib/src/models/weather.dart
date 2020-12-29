@@ -155,6 +155,7 @@ class DailyWeather extends Equatable {
   final DateTime sunset;
   final double maxTemperature;
   final double minTemperature;
+  final String description;
   final WeatherConditionIconType icon;
 
   const DailyWeather({
@@ -163,6 +164,7 @@ class DailyWeather extends Equatable {
     this.sunset,
     this.maxTemperature,
     this.minTemperature,
+    this.description,
     this.icon,
   });
 
@@ -173,6 +175,7 @@ class DailyWeather extends Equatable {
         sunset,
         maxTemperature,
         minTemperature,
+        description,
         icon,
       ];
 
@@ -187,6 +190,7 @@ class DailyWeather extends Equatable {
       minTemperature: json['temp']['min'] is int
           ? json['temp']['min'].toDouble()
           : json['temp']['min'],
+      description: (json['weather'][0]['description'] as String).capitalize(),
       icon: Weather.mapWeatherIconCodeToWeatherIcon(json['weather'][0]['icon']),
     );
   }

@@ -58,22 +58,24 @@ class WeekForecastPage extends StatelessWidget {
           ),
           children: [
             Text(
-              'Next 7 days',
+              'Today & next 7 days',
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
                 fontSize: 24.0,
               ),
             ),
+            SizedBox(height: 20.0),
             for (final day in dailyWeather)
               Padding(
-                padding: EdgeInsets.only(top: 40.0),
+                padding: EdgeInsets.only(bottom: 40.0),
                 child: WeatherLine(
                   date: DateFormat.MMMd().format(day.dateTime),
                   weekDay: DateFormat.EEEE().format(day.dateTime),
                   iconType: day.icon,
                   maxTemp: day.maxTemperature.round(),
                   minTemp: day.minTemperature.round(),
+                  description: day.description,
                 ),
               )
           ],

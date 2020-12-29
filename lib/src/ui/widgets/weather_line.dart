@@ -8,6 +8,7 @@ class WeatherLine extends StatelessWidget {
   final String date;
   final int maxTemp;
   final int minTemp;
+  final String description;
 
   const WeatherLine({
     @required this.iconType,
@@ -15,39 +16,55 @@ class WeatherLine extends StatelessWidget {
     @required this.date,
     @required this.maxTemp,
     @required this.minTemp,
+    @required this.description,
   })  : assert(iconType != null),
         assert(weekDay != null),
         assert(date != null),
         assert(maxTemp != null),
-        assert(minTemp != null);
+        assert(minTemp != null),
+        assert(description != null);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50.0,
+      height: 60.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               WeatherConditionIcon(iconType: iconType),
-              SizedBox(width: 40.0),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
+              SizedBox(width: 30.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '$weekDay, ',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    children: [
+                      Text(
+                        '$weekDay, ',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        date,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ],
                   ),
                   Text(
-                    date,
+                    description,
                     style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white54,
+                      fontSize: 16.0,
+                      color: Colors.white60,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
