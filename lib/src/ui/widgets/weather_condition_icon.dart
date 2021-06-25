@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/ui/constants.dart';
+import '../../models/models.dart';
+import '../constants.dart';
 
 class WeatherConditionIcon extends StatelessWidget {
-  final WeatherConditionIconType iconType;
-  final DateTime dateTime;
-  final DateTime sunrise;
-  final DateTime sunset;
-
   const WeatherConditionIcon({
     @required this.iconType,
     this.dateTime,
     this.sunrise,
     this.sunset,
   }) : assert(iconType != null);
+
+  final WeatherConditionIconType iconType;
+  final DateTime dateTime;
+  final DateTime sunrise;
+  final DateTime sunset;
 
   @override
   Widget build(BuildContext context) {

@@ -1,24 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/ui/widgets/widgets.dart';
+import '../../models/models.dart';
+import 'widgets.dart';
 
 class WeatherCard extends StatelessWidget {
-  final WeatherConditionIconType iconType;
-  final String weatherDescription;
-  final DateTime dateTime;
-  final DateTime sunrise;
-  final DateTime sunset;
-  final String date;
-  final String time;
-  final String temperature;
-  final String maxTemperature;
-  final String minTemperature;
-  final WeatherCardSegment segment1;
-  final WeatherCardSegment segment2;
-  final WeatherCardSegment segment3;
-  final WeatherCardSegment segment4;
-
   const WeatherCard({
     @required this.iconType,
     @required this.weatherDescription,
@@ -48,6 +33,21 @@ class WeatherCard extends StatelessWidget {
         assert(segment2 != null),
         assert(segment3 != null),
         assert(segment4 != null);
+
+  final WeatherConditionIconType iconType;
+  final String weatherDescription;
+  final DateTime dateTime;
+  final DateTime sunrise;
+  final DateTime sunset;
+  final String date;
+  final String time;
+  final String temperature;
+  final String maxTemperature;
+  final String minTemperature;
+  final WeatherCardSegment segment1;
+  final WeatherCardSegment segment2;
+  final WeatherCardSegment segment3;
+  final WeatherCardSegment segment4;
 
   @override
   Widget build(BuildContext context) {

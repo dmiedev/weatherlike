@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:weatherlike/src/blocs/blocs.dart';
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/ui/constants.dart';
+import '../../blocs/blocs.dart';
+import '../../models/models.dart';
+import '../constants.dart';
 
 class SettingsPage extends StatelessWidget {
   static const routeName = '/settings';

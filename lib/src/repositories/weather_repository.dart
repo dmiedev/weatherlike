@@ -2,15 +2,16 @@ import 'dart:async';
 
 import 'package:meta/meta.dart';
 
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/repositories/repositories.dart';
+import '../models/models.dart';
+import 'repositories.dart';
 
 class WeatherRepository {
-  final WeatherApiClient _weatherApiClient;
-
-  WeatherRepository({@required WeatherApiClient weatherApiClient})
-      : assert(weatherApiClient != null),
+  const WeatherRepository({
+    @required WeatherApiClient weatherApiClient,
+  })  : assert(weatherApiClient != null),
         _weatherApiClient = weatherApiClient;
+
+  final WeatherApiClient _weatherApiClient;
 
   Future<Location> getLocationByCityName(String cityName) async {
     return await _weatherApiClient.fetchLocationByCityName(cityName);

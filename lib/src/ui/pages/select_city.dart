@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:weatherlike/src/blocs/blocs.dart';
-import 'package:weatherlike/src/ui/constants.dart';
+import '../../blocs/blocs.dart';
+import '../constants.dart';
 
 class SelectCityPage extends StatefulWidget {
   static const routeName = '/select';
@@ -106,7 +106,7 @@ class _SelectCityPageState extends State<SelectCityPage> {
     CitySelectionState state,
   ) {
     if (state is CitySelectionFailure) {
-      String message = 'Error!';
+      var message = 'Error!';
       if (state.failureType == CitySelectionFailureType.notFound) {
         message = 'City "${state.cityName}" wasn\'t found!';
       } else if (state.failureType == CitySelectionFailureType.noInternet) {

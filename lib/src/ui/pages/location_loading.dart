@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:weatherlike/src/blocs/blocs.dart';
-import 'package:weatherlike/src/ui/pages/pages.dart';
+import '../../blocs/blocs.dart';
+import 'pages.dart';
 
 class LocationLoadingPage extends StatelessWidget {
   static const routeName = '/loading';

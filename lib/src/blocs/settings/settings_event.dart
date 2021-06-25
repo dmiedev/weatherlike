@@ -8,10 +8,10 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class MeasurementUnitsSelected extends SettingsEvent {
-  final MeasurementUnits measurementUnits;
-
   const MeasurementUnitsSelected({@required this.measurementUnits})
       : assert(measurementUnits != null);
+
+  final MeasurementUnits measurementUnits;
 
   @override
   List<Object> get props => [measurementUnits];

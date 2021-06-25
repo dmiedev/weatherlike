@@ -12,10 +12,6 @@ class WeatherInitial extends WeatherState {}
 class WeatherLoadInProgress extends WeatherState {}
 
 class WeatherLoadSuccess extends WeatherState {
-  final Weather weather;
-  final Location location;
-  final DateTime loadDateTime;
-
   const WeatherLoadSuccess({
     @required this.weather,
     @required this.location,
@@ -23,6 +19,10 @@ class WeatherLoadSuccess extends WeatherState {
   })  : assert(weather != null),
         assert(location != null),
         assert(loadDateTime != null);
+
+  final Weather weather;
+  final Location location;
+  final DateTime loadDateTime;
 
   WeatherLoadSuccess copyWith({
     Weather weather,

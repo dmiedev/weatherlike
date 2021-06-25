@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/ui/widgets/weather_condition_icon.dart';
+
+import '../../models/models.dart';
+import 'weather_condition_icon.dart';
 
 class WeatherMiniCard extends StatelessWidget {
-  final bool emphasized;
-  final WeatherConditionIconType iconType;
-  final String upperLabel;
-  final String lowerLabel;
-  final DateTime dateTime;
-  final DateTime sunrise;
-  final DateTime sunset;
-
   const WeatherMiniCard({
     this.emphasized = false,
     @required this.iconType,
@@ -25,6 +18,14 @@ class WeatherMiniCard extends StatelessWidget {
         assert(dateTime != null),
         assert(sunrise != null),
         assert(sunset != null);
+
+  final bool emphasized;
+  final WeatherConditionIconType iconType;
+  final String upperLabel;
+  final String lowerLabel;
+  final DateTime dateTime;
+  final DateTime sunrise;
+  final DateTime sunset;
 
   @override
   Widget build(BuildContext context) {

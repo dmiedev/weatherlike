@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/ui/widgets/weather_condition_icon.dart';
+
+import '../../models/models.dart';
+import 'weather_condition_icon.dart';
 
 class WeatherLine extends StatelessWidget {
-  final WeatherConditionIconType iconType;
-  final String weekDay;
-  final String date;
-  final int maxTemp;
-  final int minTemp;
-  final String description;
-
   const WeatherLine({
     @required this.iconType,
     @required this.weekDay,
@@ -23,6 +17,13 @@ class WeatherLine extends StatelessWidget {
         assert(maxTemp != null),
         assert(minTemp != null),
         assert(description != null);
+
+  final WeatherConditionIconType iconType;
+  final String weekDay;
+  final String date;
+  final int maxTemp;
+  final int minTemp;
+  final String description;
 
   @override
   Widget build(BuildContext context) {

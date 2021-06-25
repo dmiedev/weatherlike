@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class TemperatureBox extends StatelessWidget {
-  final String currentTemperature;
-  final String maxTemperature;
-  final String minTemperature;
-
   const TemperatureBox({
     @required this.currentTemperature,
     @required this.maxTemperature,
@@ -12,6 +8,10 @@ class TemperatureBox extends StatelessWidget {
   })  : assert(currentTemperature != null),
         assert(maxTemperature != null),
         assert(minTemperature != null);
+
+  final String currentTemperature;
+  final String maxTemperature;
+  final String minTemperature;
 
   @override
   Widget build(BuildContext context) {

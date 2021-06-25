@@ -4,16 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/repositories/repositories.dart';
+import '../../models/models.dart';
+import '../../repositories/repositories.dart';
 
 part 'location_event.dart';
 part 'location_state.dart';
 
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
-  final WeatherRepository _weatherRepository;
-  final LocationRepository _locationRepository;
-
   LocationBloc({
     @required WeatherRepository weatherRepository,
     @required LocationRepository locationRepository,
@@ -22,6 +19,9 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         assert(locationRepository != null),
         _locationRepository = locationRepository,
         super(LocationInitial());
+
+  final WeatherRepository _weatherRepository;
+  final LocationRepository _locationRepository;
 
   @override
   Stream<LocationState> mapEventToState(LocationEvent event) async* {
@@ -43,7 +43,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
           coordinates['longitude'],
         );
         yield LocationLoadSuccess(location: location);
-      } catch (_) {
+      } on Exception {
         yield LocationLoadFailure();
       }
     } else {

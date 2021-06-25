@@ -4,18 +4,14 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'package:weatherlike/src/blocs/blocs.dart';
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/repositories/repositories.dart';
+import '../../models/models.dart';
+import '../../repositories/repositories.dart';
+import '../blocs.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
-  final WeatherRepository _weatherRepository;
-  final SettingsBloc _settingsBloc;
-  StreamSubscription<SettingsState> _settingsSubscription;
-
   WeatherBloc({
     @required WeatherRepository weatherRepository,
     @required SettingsBloc settingsBloc,
@@ -26,6 +22,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         super(WeatherInitial()) {
     _settingsSubscription = settingsBloc.listen(_settingsListener);
   }
+
+  final WeatherRepository _weatherRepository;
+  final SettingsBloc _settingsBloc;
+  StreamSubscription<SettingsState> _settingsSubscription;
 
   @override
   Future<void> close() {
@@ -56,7 +56,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         location: event.location,
         loadDateTime: DateTime.now(),
       );
-    } catch (_) {
+    } on Exception {
       yield WeatherLoadFailure();
     }
   }
@@ -75,7 +75,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           location: event.location,
           loadDateTime: DateTime.now(),
         );
-      } catch (_) {
+      } on Exception {
         yield (state as WeatherLoadSuccess)
             .copyWith(loadDateTime: DateTime.now());
       }

@@ -1,20 +1,19 @@
 import 'package:http/http.dart' as http;
-import 'package:meta/meta.dart';
 
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/utilities/utilities.dart';
+import '../models/models.dart';
+import '../utilities/utilities.dart';
 
 class WeatherApiClient {
+  WeatherApiClient({
+    http.Client httpClient,
+  })  : assert(httpClient != null),
+        _networkHelper =
+            NetworkHelper(httpClient, _authority, {'appid': _apiKey});
+
   static const _authority = 'api.openweathermap.org';
   static const _apiKey = '29d7a04de099306daa7ee8cb4c92150a';
 
-  final http.Client httpClient;
-  NetworkHelper _networkHelper;
-
-  WeatherApiClient({@required this.httpClient})
-      : assert(httpClient != null),
-        _networkHelper =
-            NetworkHelper(httpClient, _authority, {'appid': _apiKey});
+  final NetworkHelper _networkHelper;
 
   Future<Location> fetchLocationByCityName(String cityName) async {
     final List data = await _networkHelper.getData(

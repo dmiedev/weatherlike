@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class TopTitle extends StatelessWidget {
+  const TopTitle({
+    @required this.primaryText,
+    this.secondaryText,
+    this.actions,
+  }) : assert(primaryText != null);
+
   final String primaryText;
   final String secondaryText;
   final List<Widget> actions;
-
-  const TopTitle({@required this.primaryText, this.secondaryText, this.actions})
-      : assert(primaryText != null);
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:weatherlike/src/blocs/blocs.dart';
-import 'package:weatherlike/src/ui/constants.dart';
-import 'package:weatherlike/src/ui/pages/pages.dart';
-import 'package:weatherlike/src/ui/widgets/widgets.dart';
+import '../../blocs/blocs.dart';
+import '../constants.dart';
+import '../widgets/widgets.dart';
+import 'pages.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/';
@@ -90,11 +89,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildMessage(WeatherState state) {
     if (state is WeatherLoadInProgress) return CircularProgressIndicator();
-    String message = '';
-    if (state is WeatherInitial)
+    var message = '';
+    if (state is WeatherInitial) {
       message = 'Select a city by pressing search button above';
-    else if (state is WeatherLoadFailure)
+    } else if (state is WeatherLoadFailure) {
       message = 'An error happened while loading weather data!';
+    }
     return Text(
       message,
       style: TextStyle(fontSize: 20.0, color: Colors.black54),

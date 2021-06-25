@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:weatherlike/src/app.dart';
-import 'package:weatherlike/src/blocs/blocs.dart';
-import 'package:weatherlike/src/repositories/repositories.dart';
-import 'package:weatherlike/src/utilities/utilities.dart';
+import 'src/app.dart';
+import 'src/blocs/blocs.dart';
+import 'src/repositories/repositories.dart';
+import 'src/utilities/utilities.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();

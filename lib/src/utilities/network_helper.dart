@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class NetworkHelper {
-  final http.Client httpClient;
-  final String authority;
-  final Map<String, String> defaultParameters;
-
   const NetworkHelper(
     this.httpClient,
     this.authority, [
     this.defaultParameters,
   ]);
+
+  final http.Client httpClient;
+  final String authority;
+  final Map<String, String> defaultParameters;
 
   void close() => httpClient.close();
 

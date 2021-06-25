@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/ui/constants.dart';
-import 'package:weatherlike/src/ui/widgets/widgets.dart';
+import '../../models/models.dart';
+import '../constants.dart';
+import '../widgets/widgets.dart';
 
 class WeekForecastPage extends StatelessWidget {
+  const WeekForecastPage({
+    @required this.dailyWeather,
+    @required this.location,
+  })  : assert(dailyWeather != null),
+        assert(location != null);
+
   final List<DailyWeather> dailyWeather;
   final Location location;
-
-  const WeekForecastPage({@required this.dailyWeather, @required this.location})
-      : assert(dailyWeather != null),
-        assert(location != null);
 
   @override
   Widget build(BuildContext context) {

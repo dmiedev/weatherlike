@@ -8,9 +8,9 @@ abstract class CitySelectionEvent extends Equatable {
 }
 
 class CitySelectionMade extends CitySelectionEvent {
-  final String cityName;
-
   const CitySelectionMade({@required this.cityName}) : assert(cityName != null);
+
+  final String cityName;
 
   @override
   List<Object> get props => [cityName];

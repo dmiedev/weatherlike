@@ -4,20 +4,20 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/repositories/repositories.dart';
-import 'package:weatherlike/src/utilities/utilities.dart';
+import '../../models/models.dart';
+import '../../repositories/repositories.dart';
+import '../../utilities/utilities.dart';
 
 part 'city_selection_event.dart';
 part 'city_selection_state.dart';
 
 class CitySelectionBloc extends Bloc<CitySelectionEvent, CitySelectionState> {
-  final WeatherRepository _weatherRepository;
-
   CitySelectionBloc({@required WeatherRepository weatherRepository})
       : assert(weatherRepository != null),
         _weatherRepository = weatherRepository,
         super(CitySelectionInitial());
+
+  final WeatherRepository _weatherRepository;
 
   @override
   Stream<CitySelectionState> mapEventToState(
@@ -47,9 +47,7 @@ class CitySelectionBloc extends Bloc<CitySelectionEvent, CitySelectionState> {
         failureType: CitySelectionFailureType.notFound,
         cityName: event.cityName,
       );
-    } catch (e, st) {
-      print(e);
-      print(st);
+    } on Exception {
       yield CitySelectionFailure(
         failureType: CitySelectionFailureType.noInternet,
         cityName: event.cityName,

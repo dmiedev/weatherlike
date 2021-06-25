@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:weatherlike/src/utilities/utilities.dart';
+import '../utilities/utilities.dart';
 
 enum WeatherConditionIconType {
   unknown,
@@ -16,19 +16,6 @@ enum WeatherConditionIconType {
 }
 
 class Weather extends Equatable {
-  final DateTime currentDateTime;
-  final DateTime sunrise;
-  final DateTime sunset;
-  final double temperature;
-  final double feelsLike;
-  final double humidity;
-  final double uvIndex;
-  final double windSpeed;
-  final String description;
-  final WeatherConditionIconType icon;
-  final List<HourlyWeather> hourly;
-  final List<DailyWeather> daily;
-
   const Weather({
     this.currentDateTime,
     this.sunrise,
@@ -43,6 +30,19 @@ class Weather extends Equatable {
     this.hourly,
     this.daily,
   });
+
+  final DateTime currentDateTime;
+  final DateTime sunrise;
+  final DateTime sunset;
+  final double temperature;
+  final double feelsLike;
+  final double humidity;
+  final double uvIndex;
+  final double windSpeed;
+  final String description;
+  final WeatherConditionIconType icon;
+  final List<HourlyWeather> hourly;
+  final List<DailyWeather> daily;
 
   @override
   List<Object> get props => [

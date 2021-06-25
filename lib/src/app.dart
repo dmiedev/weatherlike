@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:weatherlike/src/blocs/blocs.dart';
-import 'package:weatherlike/src/repositories/repositories.dart';
-import 'package:weatherlike/src/ui/pages/location_loading.dart';
-import 'package:weatherlike/src/ui/pages/pages.dart';
+import 'blocs/blocs.dart';
+import 'repositories/repositories.dart';
+import 'ui/pages/location_loading.dart';
+import 'ui/pages/pages.dart';
 
 class WeatherLikeApp extends StatelessWidget {
-  final WeatherRepository weatherRepository;
-
-  WeatherLikeApp({Key key, @required this.weatherRepository})
-      : assert(weatherRepository != null),
+  const WeatherLikeApp({
+    Key key,
+    @required this.weatherRepository,
+  })  : assert(weatherRepository != null),
         super(key: key);
+
+  final WeatherRepository weatherRepository;
 
   @override
   Widget build(BuildContext context) {

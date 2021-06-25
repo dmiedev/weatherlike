@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import 'package:weatherlike/src/models/models.dart';
-import 'package:weatherlike/src/ui/constants.dart';
-import 'package:weatherlike/src/ui/pages/pages.dart';
-import 'package:weatherlike/src/ui/widgets/widgets.dart';
+import '../../models/models.dart';
+import '../constants.dart';
+import '../pages/pages.dart';
+import 'widgets.dart';
 
 class WeatherContent extends StatelessWidget {
-  final Weather weather;
-  final Location location;
-  final MeasurementUnits units;
-
   const WeatherContent({
     @required this.weather,
     @required this.location,
@@ -19,6 +15,10 @@ class WeatherContent extends StatelessWidget {
   })  : assert(weather != null),
         assert(location != null),
         assert(units != null);
+
+  final Weather weather;
+  final Location location;
+  final MeasurementUnits units;
 
   String get _thermometerIconName {
     return weather.feelsLike >= (units == MeasurementUnits.metric ? 0 : 32)
